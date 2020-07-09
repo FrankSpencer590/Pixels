@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CloudKit
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -15,6 +16,44 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        let container = CKContainer.default()
+        let publicDatabase = container.publicCloudDatabase
+        let query = CKQuery(recordType: "square", predicate: NSPredicate(value: true))
+        
+        let group = DispatchGroup()
+        group.enter()
+        
+        DispatchQueue.main.async {
+            publicDatabase.perform(query, inZoneWith: nil) { (record, error) in
+                if error != nil {
+                    print(error!.localizedDescription)
+                } else {
+                    Global.data.pixels = []
+                    Global.data.grid = [[]]
+                    for record: CKRecord in record! {
+                        let row: Int = record.value(forKey: "row") as! Int
+                        let column: Int = record.value(forKey: "column") as! Int
+                        let colour: Int = record.value(forKey: "colour") as! Int
+                        let id: Int = record.value(forKey: "id") as! Int
+                        
+                        let pixel = Pixel()
+                        pixel.column = column
+                        pixel.row = row
+                        pixel.colour = colour
+                        pixel.id = id
+                        
+                        Global.data.pixels.append(pixel)
+                    }
+                    for i in Global.data.pixels {
+                        Global.data.grid[i.row!].insert(i.colour!, at: i.column!)
+                    }
+                }
+                
+                
+                group.leave()
+                
+            }
+        }
         return true
     }
 

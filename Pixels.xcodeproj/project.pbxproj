@@ -20,6 +20,7 @@
 		224AF9CC24B63266004D76E9 /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224AF9CB24B63266004D76E9 /* Global.swift */; };
 		224AF9D224B66232004D76E9 /* ColoursView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224AF9D124B66232004D76E9 /* ColoursView.swift */; };
 		224AF9D424B666C6004D76E9 /* ColoursViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 224AF9D324B666C6004D76E9 /* ColoursViewController.swift */; };
+		2275DBE524B782AE00AD9D68 /* Pixel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2275DBE424B782AE00AD9D68 /* Pixel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +61,7 @@
 		224AF9CB24B63266004D76E9 /* Global.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
 		224AF9D124B66232004D76E9 /* ColoursView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColoursView.swift; sourceTree = "<group>"; };
 		224AF9D324B666C6004D76E9 /* ColoursViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColoursViewController.swift; sourceTree = "<group>"; };
+		2275DBE424B782AE00AD9D68 /* Pixel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Pixel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,6 +118,7 @@
 				22408ED524B620F6008EBDF1 /* AppDelegate.swift */,
 				22408ED724B620F6008EBDF1 /* GameScene.sks */,
 				22408EDB24B620F6008EBDF1 /* GameScene.swift */,
+				2275DBE424B782AE00AD9D68 /* Pixel.swift */,
 				22408EDD24B620F6008EBDF1 /* GameViewController.swift */,
 				224AF9D324B666C6004D76E9 /* ColoursViewController.swift */,
 				22408EDF24B620F6008EBDF1 /* Main.storyboard */,
@@ -285,6 +288,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2275DBE524B782AE00AD9D68 /* Pixel.swift in Sources */,
 				224AF9CC24B63266004D76E9 /* Global.swift in Sources */,
 				22408EDC24B620F6008EBDF1 /* GameScene.swift in Sources */,
 				22408EDE24B620F6008EBDF1 /* GameViewController.swift in Sources */,

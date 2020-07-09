@@ -18,27 +18,31 @@ class GameScene: SKScene {
     
     override func sceneDidLoad() {
         self.backgroundColor = .black
-        var column = 0
-        var row = 0
-        for i in Global.data.grid {
-            row = 0
-            for value in i {
-                //print(String(describing: column)+","+String(describing: row)+": "+String(describing: Global.data.colours[value].accessibilityName))
-                
-                let node = SKSpriteNode()
-                node.color = Global.data.colours[value]
-                node.size.width = 1
-                node.size.height = 1
-                node.position = CGPoint(x: row, y: column)
-                node.anchorPoint = CGPoint(x: 0, y: 0)
-                node.isUserInteractionEnabled = false
-                self.addChild(node)
-                row += 1
+        loadPixels()
+        
+    }
+    
+    
+    func loadPixels() {
+        for i in self.children {
+            if i.name != nil {
+                if i.name!.contains("pixel") {
+                    i.delete(self)
+                }
             }
             
-            column += 1
         }
-        
+        for i in Global.data.pixels {
+            let node = SKSpriteNode()
+            //node.name = "pixel"+String(describing: i.id!)
+            node.color = Global.data.colours[i.colour!]
+            node.size.width = 1
+            node.size.height = 1
+            node.position = CGPoint(x: i.column!, y: i.row!)
+            node.anchorPoint = CGPoint(x: 0, y: 0)
+            node.isUserInteractionEnabled = false
+            self.addChild(node)
+        }
     }
     
     override func didMove(to view: SKView) {
@@ -101,12 +105,17 @@ class GameScene: SKScene {
         let previousLocation = touch.previousLocation(in: self)
         
         if distanceBetween(location, previousLocation) == 0.0 {
-            if let square = self.nodes(at: (touch.location(in: self))).first as? SKSpriteNode {
-                square.color = Global.data.selectedColour
+            if let pixel = self.nodes(at: (touch.location(in: self))).first as? SKSpriteNode {
+                for i in Global.data.pixels {
+                    if i.row! == Int(pixel.position.y) && i.column! == Int(pixel.position.x) {
+                        i.colour = Global.data.colours.firstIndex(of: Global.data.selectedColour)
+                        loadPixels()
+                    }
+                }
             }
         }
         
-        
+        loadPixels()
         
         for t in touches { self.touchUp(atPoint: t.location(in: self)) }
     }
